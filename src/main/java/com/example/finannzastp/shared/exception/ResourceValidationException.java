@@ -1,10 +1,10 @@
 package com.example.finannzastp.shared.exception;
 
-import jakarta.validation.ConstraintViolation;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ConstraintViolation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;

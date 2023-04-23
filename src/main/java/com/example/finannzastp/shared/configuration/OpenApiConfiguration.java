@@ -13,12 +13,12 @@ public class OpenApiConfiguration {
     public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("AdventureHub API")
+                        .title("MoneyMatters API")
                         .version("1.0.0")
-                        .termsOfService("https://adventurehub.com/tos")
-                        .license(new License().name("Apache 2.0 License").url("https://adventurehub.com/license"))
+                        .termsOfService("https://moneymatters.com/tos")
+                        .license(new License().name("Apache 2.0 License").url("https://moneymatters.com/license"))
                         .contact(new Contact()
-                                .url("https://adventurehub.studio")
-                                .name("ADVENTUREHUB.studio")));
+                                .url("https://moneymatters.studio")
+                                .name("MONEYMATTERS.studio")));
     }
 }

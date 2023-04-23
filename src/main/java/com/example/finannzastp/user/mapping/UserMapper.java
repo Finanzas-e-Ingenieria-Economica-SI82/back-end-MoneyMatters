@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -39,6 +40,11 @@ public class UserMapper implements Serializable {
     public UserResource toResource(User user) {
         return new UserResource(user.getId(), user.getUsername());
     }
+
+    public List<UserResource> toResourceList(List<User> modelList){
+        return modelList.stream().map(this::toResource).collect(Collectors.toList());
+
+}
 
 }
 

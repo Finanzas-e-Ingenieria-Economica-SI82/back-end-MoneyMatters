@@ -5,7 +5,6 @@ import com.example.finannzastp.user.domain.persistence.UserRepository;
 import com.example.finannzastp.user.domain.service.AuthService;
 import com.example.finannzastp.user.resource.AuthCredentialsResource;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +17,15 @@ public class AuthServiceImpl implements AuthService {
     UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
+    @Override
+    public boolean authenticateUser(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return false;
+        }
+
+        return passwordEncoder.matches(password, user.getPassword());
+    }
 
 
     public User login(AuthCredentialsResource credentials) {
@@ -25,8 +33,10 @@ public class AuthServiceImpl implements AuthService {
         String password = credentials.getPassword();
 
         User user = userRepository.findByUsername(username);
-        if (user == null) {
+        if (!user.getUsername().equals(username)) {
+
             throw new IllegalArgumentException("User not found");
+
         }
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Wrong password");
@@ -39,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setUsername(registration.getUsername());
         user.setPassword(registration.getPassword());
+
         return userRepository.save(user);
     }
 

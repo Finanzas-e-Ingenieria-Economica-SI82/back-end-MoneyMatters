@@ -5,8 +5,10 @@ import com.example.finannzastp.user.domain.service.AuthService;
 import com.example.finannzastp.user.mapping.UserMapper;
 import com.example.finannzastp.user.resource.AuthCredentialsResource;
 import com.example.finannzastp.user.resource.UserResource;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,17 +30,22 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUserAccount(@ModelAttribute("user") @Valid AuthCredentialsResource registration, BindingResult result) {
-        if (result.hasErrors()) {
-            return "register";
-        }
-        authService.register(registration);
-        return "redirect:/login";
+    @ApiOperation(value = "Registers a new user", response = User.class)
+    public User registerUser(@Valid @RequestBody AuthCredentialsResource registration) {
+
+        return authService.register(registration);
     }
 
     @PostMapping("/login")
     @Operation(summary = "Login", tags = {"Auth"})
     public ResponseEntity<User> login(@RequestBody AuthCredentialsResource credentials) {
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
+        if (!authService.authenticateUser(username, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         return ResponseEntity.ok(authService.login(credentials));
     }
 

@@ -1,4 +1,8 @@
 package com.example.finannzastp.finance.domain.persistence;
 
-public class SistemaFrancesRepository {
+
+import org.springframework.stereotype.Repository;
+
+public class SistemaFrancesRepository{
+
 }

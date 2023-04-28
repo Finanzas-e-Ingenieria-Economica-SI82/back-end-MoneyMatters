@@ -1,7 +1,8 @@
-package com.example.finannzastp.user.mapping;
+package com.example.finannzastp.finance.mapping;
 
 import com.example.finannzastp.finance.domain.service.SistemaFrancesService;
 import com.example.finannzastp.finance.mapping.SistemaFrancesMapper;
+import com.example.finannzastp.user.mapping.UserMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

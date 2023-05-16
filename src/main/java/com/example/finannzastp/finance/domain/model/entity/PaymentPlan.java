@@ -6,24 +6,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sistema")
-public class SistemaFrances {
+@Table(name = "payment_plan")
+public class PaymentPlan{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private double montoPrestamo;
-    private double tasaInteresAnual;
-    private int cantidadCuotas;
-    private LocalDate fechaInicio;
-    private double valorCuota;
-    private double totalIntereses;
-    private double totalPagar;
+    @Column(nullable = false)
+    private double balance;
+
+    @Column(nullable = false)
+    private double TEM;
+
+    @Column(nullable = false)
+    private int installments;
+
+    @Column(nullable = false)
+    private double VAN;
+
+    @Column(nullable = false)
+    private double TIR;
+
+
 }
